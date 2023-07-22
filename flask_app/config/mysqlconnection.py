@@ -1,4 +1,5 @@
 import pymysql
+
 class MySQLConnection:
     def __init__(self, db):
         connection = pymysql.connect(host = "localhost",
