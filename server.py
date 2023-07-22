@@ -1,4 +1,4 @@
-# from flask_app.controllers import 
+from flask_app.controllers import welcome
 from flask_app import app
 
 if __name__=="__main__":
