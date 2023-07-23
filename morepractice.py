@@ -14,13 +14,11 @@ page_results = response.json()['results']
 home_books = []
 
 for books in page_results:
-    isbns = books['isbns']
-    print(isbns[0])
     book_data = {
             'title': books['title'],
             'author': books['author'],
             'description': books['description'],
-            'publisher': books['publisher'],
+            'publisher': books['publisher']
             # NEED TO FIGURE OUT HOW TO DO THE ISBN NUMBERS TO ID THE BOOKS FOR OUR SAVE FEATURE
             }
     home_books.append(book_data)
