@@ -10,6 +10,7 @@ def jprint(obj):
 class Book: 
 
     #GET ALL/DEFAULT 
+    @classmethod
     def get_all(cls):
         response = requests.get(api_url)
 
@@ -19,6 +20,7 @@ class Book:
 
         for books in page_results:
             book_data = {
+                'isbn': books['isbns'][0]['isbn10'] if len(books['isbns']) > 0 else None,
                 'title': books['title'],
                 'author': books['author'],
                 'description': books['description'],

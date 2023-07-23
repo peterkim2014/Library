@@ -18,8 +18,9 @@ for books in page_results:
             'title': books['title'],
             'author': books['author'],
             'description': books['description'],
-            'publisher': books['publisher']
-            # NEED TO FIGURE OUT HOW TO DO THE ISBN NUMBERS TO ID THE BOOKS FOR OUR SAVE FEATURE
+            'publisher': books['publisher'],
+            # 'isbns': books['isbns'][0]['isbn10']
+            'isbn': books['isbns'][0]['isbn10'] if len(books['isbns']) > 0 else None
             }
     home_books.append(book_data)
 jprint(home_books)
