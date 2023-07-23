@@ -33,4 +33,4 @@ print(all_titles)
 
 # print(response2.status_code)
 
-# jprint(response2.json())
+jprint(response2.json())
