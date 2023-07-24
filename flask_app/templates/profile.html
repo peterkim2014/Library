@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body>
+    <container class="d-flex flex-column vh-100">
+        <header class="bg-info text-white p-3 border-bottom border-black border-3 d-flex justify-content-between">
+            <h1>WEBSITE NAME HERE</h1>
+            <nav class="d-flex align-items-center gap-1">
+                <!-- HREFS ARE EMPTY FOR THE CONTROLLER ROUTES -->
+                <a class="btn bg-info-subtle border-black" href="./home.html">Home</a>
+                <a class="btn bg-info-subtle border-black" href="./users.html">Users</a>
+                <a class="btn bg-white border-black" href="">Profile</a>
+                <a class="btn bg-info-subtle border-black" href="">Logout</a>
+            </nav>
+        </header>
+        <main class="d-flex justify-content-center align-items-center vh-100">
+            <div class="card container p-3">
+                <div class="card-header d-flex justify-content-between">
+                    <h2>UserName Here</h2>
+                    <div class="d-flex align-items-center">
+                        <a class="btn bg-warning text-white" href="">Edit Profile</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex gap-3">
+                        <p><strong>Name:</strong></p>
+                        <p>(Insert name here)</p>
+                    </div>
+                    <div class="d-flex gap-3">
+                        <p><strong>Birthday:</strong></p>
+                        <p>N/A</p>
+                    </div>
+                    <div class="d-flex gap-3">
+                        <p><strong>Gender:</strong></p>
+                        <p>N/A</p>
+                    </div>
+                    <div class="d-flex gap-3">
+                        <p><strong>Email:</strong></p>
+                        <p>(Insert email here)</p>
+                    </div>
+                    <div class="d-flex gap-3">
+                        <p><strong>Member Since:</strong></p>
+                        <p>(Insert created at here)</p>
+                    </div>
+                </div>
+                <div style="height: 20rem;" class="card-footer overflow-auto">
+                    <table class="table table-striped table-bordered border border-2 border-black">
+                        <thead class="text-decoration-underline">
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>BOOK TITLE</td>
+                                <td>AUTHOR NAME</td>
+                                <td class="d-flex justify-content-evenly">
+                                    <a class="btn bg-danger text-white" href="">Remove from Reading List</a>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </container>
+</body>
+</html>
