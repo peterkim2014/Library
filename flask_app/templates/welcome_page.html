@@ -14,6 +14,15 @@
     </header>
     <content style="margin-top: 12rem;" class="d-flex justify-content-evenly">
         <form class="border border-3 p-5 d-flex flex-column justify-content-evenly rounded" action="/register" method="POST">
+            {% with messages = get_flashed_messages(category_filter=["reg_error"]) %}
+            {% if messages %}
+            <ul class="list-unstyled">
+                {% for message in messages %}
+                    <li class="bg-danger-subtle m-1 p-1">{{message}}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        {% endwith %}
             <h2 class="text-center">Register</h2>
             <hr>
             <div>
@@ -37,6 +46,15 @@
             </div>
         </form>
         <form class="border border-3 p-5 d-flex flex-column justify-content-evenly rounded" action="/login" method="POST">
+            {% with messages = get_flashed_messages(category_filter=["login"]) %}
+            {% if messages %}
+            <ul class="list-unstyled">
+                {% for message in messages %}
+                    <li class="bg-danger-subtle m-1 p-1">{{message}}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        {% endwith %}
             <h2 class="text-center">Login</h2>
             <hr>
             <div>

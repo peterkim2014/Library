@@ -66,7 +66,17 @@ class User:
         return results
 
     #LOGIN 
-
+    @classmethod
+    def find_user(cls, data):
+        query = """
+        SELECT * FROM users WHERE username = %(username)s;
+        """
+        result = MySQLConnection(cls.db).query_db(query,data)
+        if len(result) < 1:
+            return False
+        else:
+            return cls(result[0])
+        
     #SAVE BOOK
     @classmethod
     def add_book(cls,data):
