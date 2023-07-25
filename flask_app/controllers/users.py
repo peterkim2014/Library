@@ -1,6 +1,7 @@
 from flask_app import app
 from flask import Flask, redirect, render_template, request, flash, session
 from ..models.user import User
+from ..models.book import Book
 # from ..models.book import Book
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
@@ -18,7 +19,7 @@ def home_page():
         data = {
             'id': session['user_id']
         }
-    return render_template('home.html', user=User.get_by_id(data))
+    return render_template('home.html', user=User.get_by_id(data), books=Book.get_all())
 
 @app.route('/users')
 def all_users():
