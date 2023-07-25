@@ -9,20 +9,25 @@
 <body>
     <container class="d-flex flex-column vh-100">
         <header class="bg-info text-white p-3 border-bottom border-black border-3 d-flex justify-content-between">
-            <h1>WEBSITE NAME HERE</h1>
+            <h1>Books for Nooks</h1>
             <nav class="d-flex align-items-center gap-1">
                 <!-- HREFS ARE EMPTY FOR THE CONTROLLER ROUTES -->
+
                 <a class="btn bg-info-subtle border-black" href="./home.html">Home</a>
                 <a class="btn bg-info-subtle border-black" href="./users.html">Users</a>
                 <a class="btn bg-info-subtle border-black" href="./book.html">Add Books</a>
-                <a class="btn bg-white border-black" href="">Profile</a>
+
+                <a class="btn bg-info-subtle border-black" href="/home">Home</a>
+                <a class="btn bg-info-subtle border-black" href="/users">Users</a>
+                <a class="btn bg-white border-black" href="/users/{{session_user.id}}">Profile</a>
+
                 <a class="btn bg-info-subtle border-black" href="">Logout</a>
             </nav>
         </header>
         <main class="d-flex justify-content-center align-items-center vh-100">
             <div class="card container p-3">
                 <div class="card-header d-flex justify-content-between">
-                    <h2>UserName Here</h2>
+                    <h2>{{user.username}}</h2>
                     <div class="d-flex align-items-center">
                         <a class="btn bg-warning text-white" href="./edit_profile.html">Edit Profile</a>
                     </div>
@@ -30,43 +35,45 @@
                 <div class="card-body">
                     <div class="d-flex gap-3">
                         <p><strong>Name:</strong></p>
-                        <p>(Insert name here)</p>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <p><strong>Birthday:</strong></p>
-                        <p>N/A</p>
+                        <p>{{user.real_name}}</p>
                     </div>
                     <div class="d-flex gap-3">
                         <p><strong>Gender:</strong></p>
-                        <p>N/A</p>
+                        <p>{{user.gender}}</p>
                     </div>
                     <div class="d-flex gap-3">
                         <p><strong>Email:</strong></p>
-                        <p>(Insert email here)</p>
+                        <p>{{user.email}}</p>
                     </div>
                     <div class="d-flex gap-3">
                         <p><strong>Member Since:</strong></p>
-                        <p>(Insert created at here)</p>
+                        <p>{{user.created_at}}</p>
                     </div>
                 </div>
                 <div style="height: 20rem;" class="card-footer overflow-auto">
+                    <h2>Reading List</h2>
                     <table class="table table-striped table-bordered border border-2 border-black">
                         <thead class="text-decoration-underline">
                             <tr>
                                 <th>Title</th>
                                 <th>Author</th>
-                                <th>Actions</th>
+                                {% if session['user_id'] == user.id %}
+                                    <th>Actions</th>
+                                {% endif %}
                             </tr>
                         </thead>
+                        {% for book in user.saved_books %}
                         <tbody>
                             <tr>
-                                <td>BOOK TITLE</td>
-                                <td>AUTHOR NAME</td>
-                                <td class="d-flex justify-content-evenly">
-                                    <a class="btn bg-danger text-white" href="">Remove from Reading List</a>
-                                </td>
+                                <td>{{book.title}}</td>
+                                <td>{{book.author}}</td>
+                                {% if session['user_id'] == user.id %}
+                                    <td class="d-flex justify-content-evenly">
+                                        <a class="btn bg-danger text-white" href="">Remove from Reading List</a>
+                                    </td>
+                                {% endif %}
                             </tr>
-                            
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
