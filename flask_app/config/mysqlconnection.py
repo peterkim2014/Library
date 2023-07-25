@@ -1,4 +1,4 @@
-import pymysql
+import pymysql.cursors
 
 class MySQLConnection:
     def __init__(self, db):
@@ -30,5 +30,5 @@ class MySQLConnection:
             finally:
                 self.connection.close()
 
-    def connectToMySQL(db):
-        return MySQLConnection(db)
+def connectToMySQL(db):
+    return MySQLConnection(db)

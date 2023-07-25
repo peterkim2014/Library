@@ -1,7 +1,7 @@
 from flask_app import app
 from flask import Flask, redirect, render_template, request, flash, session
 from ..models.user import User
-from ..models.book import Book
+# from ..models.book import Book
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 dataFormat = "%#m/%#d/%Y %I: %M %p"
@@ -15,12 +15,9 @@ def home_page():
     if 'user_id' not in session: 
         return redirect ('/')
     else: 
-        data ={
+        data = {
             'id': session['user_id']
         }
-    data = {
-        'id': session['user_id']
-    }
     return render_template('home.html', user=User.get_by_id(data))
 
 @app.route('/users')
@@ -32,6 +29,19 @@ def all_users():
             'id': session['user_id']
         }
     return render_template('users.html', users=User.get_all(), user=User.get_by_id(data))
+
+@app.route('/users/<int:id>')
+def user_profile(id):
+    if 'user_id' not in session:
+        return redirect('/')
+    else:
+        session_data = {
+            'id': session['user_id']
+        }
+        data = {
+            "id": id
+        }
+        return render_template('profile.html', session_user=User.get_by_id(session_data), user=User.get_by_id(data))
 
 #ACTIONS/POSTS 
 @app.route('/register', methods=['POST'])
