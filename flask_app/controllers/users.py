@@ -57,3 +57,8 @@ def reg():
     session['user_id'] = id
 
     return redirect('/home')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/')
