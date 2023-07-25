@@ -1,10 +1,10 @@
-import pymysql
+import pymysql.cursors
 
 class MySQLConnection:
     def __init__(self, db):
         connection = pymysql.connect(host = "localhost",
                                      user = "root",
-                                     password = "rootroot",
+                                     password = "@JPlover1975",
                                      db = db,
                                      charset = "utf8mb4",
                                      cursorclass = pymysql.cursors.DictCursor,
@@ -30,5 +30,5 @@ class MySQLConnection:
             finally:
                 self.connection.close()
 
-    def connectToMySQL(db):
-        return MySQLConnection(db)
+def connectToMySQL(db):
+    return MySQLConnection(db)
