@@ -13,14 +13,7 @@
         <h1>Books for Nooks</h1>
     </header>
     <content style="margin-top: 12rem;" class="d-flex justify-content-evenly">
-        <form class="border border-3 p-5 rounded" action="/register" method="post">
-            {% with messages = get_flashed_messages(category_filter=['reg_error']) %} 
-                {% if messages %}
-                    {% for message in messages %}
-                        <p>{{message}}</p>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
+
             <h2 class="text-center">Register</h2>
             <hr>
             <div>
