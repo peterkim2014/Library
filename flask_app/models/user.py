@@ -1,4 +1,4 @@
-from flask_app.config.mysqlconnection import MySQLConnection
+from flask_app.config.mysqlconnection import MySQLConnection, connectToMySQL
 from flask import flash
 import re #Regex module
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
@@ -48,3 +48,9 @@ class User:
                     'created_at': row['created_at'],
                     'updated_at': row['updated_at'],
                 }
+
+        #POST METHODS
+
+
+
+        #VALIDATIONS

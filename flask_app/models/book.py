@@ -48,8 +48,9 @@ class Book:
                 book.saved_by.append(user.User(data))
             return book 
         
-        @classmethod 
-        def add_movie(cls, form_data):
+        #POST METHODS
+        @classmethod #Save/Add a new book 
+        def add_book(cls, form_data):
             query = """
                     INSERT INTO books (title, author, pages, publisher)
                     VALUES (%(title)s, %(author)s, %(page)s, %(publisher)s);
@@ -57,3 +58,56 @@ class Book:
             results = connectToMySQL(cls.db).query_db(query, form_data)
             print(results) 
             return results
+        
+        @classmethod #Edit 
+        def update_book(cls,form_data):
+            query = """
+                    UPDATE books
+                    SET title = %(title)s,
+                    author = %(author)s,
+                    pages = %(pages)s, 
+                    publisher = %(publisher)s,
+                    updated_at = NOW()
+                    WHERE id = %(id)s;
+                    """
+            results = connectToMySQL(cls.db).query_db(query,form_data)
+            return results
+        
+        @classmethod
+        def eliminate(cls,data):
+            query = """
+                    DELETE FROM books
+                    WHERE id = %(id)s;
+                    """
+            results = connectToMySQL(cls.db).query_db(query,data)
+            return results
+
+
+
+        #VALIDATIONS
+        @staticmethod
+        def validate_book(book):
+            is_valid = True
+            query = """
+                    SELECT * FROM books
+                    WHERE title = %(title)s
+                    AND author = %(author)s;
+                    """
+            #Since there are books that share the same title, the query makes sure to check if both the title and author are the same before rejecting it
+            results = connectToMySQL(Book.db).query_db(query, book)
+
+            if len(results) >= 1: 
+                flash("Book is already part of our database")
+                is_valid = False
+
+            if len(book['title']) < 1:
+                flash("Must include a title for this book")
+                is_valid = False
+            
+            if len(book['author']) < 3: 
+                flash("Must include the author of the book")
+                is_valid = False
+            
+            return is_valid
+
+
