@@ -98,6 +98,7 @@ class User:
 
         if not EMAIL_REGEX.match(user['email']):
             flash("Invalid email address", 'reg_error')
+            is_valid = False
 
         if len(user['password']) < 8:
             flash("Password must contain more than 8 characters", 'reg_error')
@@ -105,6 +106,7 @@ class User:
             
         if user['password'] != user['confirm-password']:
             flash("Passwords don't match", 'reg_error')
+            is_valid = False
 
         print(user['password'])
         print(is_valid)
