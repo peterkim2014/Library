@@ -73,6 +73,7 @@ def reg():
 
 @app.route('/login', methods=['POST'])
 def login():
+
     user = User.get_by_username(request.form)
 
     if not user:
@@ -127,6 +128,20 @@ def unsave_book():
     }
     print(form_data)
     User.remove_book(form_data)
+
+    data = { 'username': request.form['username'] }
+    user_in_db = User.find_user(data)
+    if not user_in_db:
+        flash('Invalid UserName/Password', 'login')
+        return redirect('/')
+    if not bcrypt.check_password_hash(user_in_db.password, request.form['password']):
+        flash('Invalid UserName/Password', 'login')
+        return redirect('/')
+    session['user_id'] = user_in_db.id
+    print(user_in_db)
+    print(session['user_id'])
+    session['logged_in'] = True
+
     return redirect('/home')
 
 @app.route('/logout')

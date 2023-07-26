@@ -76,6 +76,7 @@ class User:
         results = connectToMySQL(cls.db).query_db(query,data)
         print(results)
         return results
+
     
     @classmethod
     def update_user(cls, form_data):
@@ -87,6 +88,21 @@ class User:
                 WHERE id = %(id)s;
                 """
         return connectToMySQL(cls.db).query_db(query, form_data)
+
+
+
+    #LOGIN 
+    @classmethod
+    def find_user(cls, data):
+        query = """
+        SELECT * FROM users WHERE username = %(username)s;
+        """
+        result = MySQLConnection(cls.db).query_db(query,data)
+        if len(result) < 1:
+            return False
+        else:
+            return cls(result[0])
+        
 
     #SAVE BOOK
     @classmethod
@@ -127,6 +143,7 @@ class User:
 
         if not EMAIL_REGEX.match(user['email']):
             flash("Invalid email address", 'reg_error')
+            is_valid = False
 
         if len(user['password']) < 8:
             flash("Password must contain more than 8 characters", 'reg_error')
@@ -134,6 +151,7 @@ class User:
             
         if user['password'] != user['confirm-password']:
             flash("Passwords don't match", 'reg_error')
+            is_valid = False
 
         print(user['password'])
         print(is_valid)
