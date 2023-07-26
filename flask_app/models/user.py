@@ -26,6 +26,17 @@ class User:
         for row in results: 
             users.append(cls(row))
         return users
+    
+    @classmethod
+    def get_by_username(cls, data):
+        query = """
+                SELECT * FROM users
+                WHERE username = %(username)s;
+                """
+        results = connectToMySQL(cls.db).query_db(query, data)
+        if len(results) < 1:
+            return False
+        return cls(results[0])
         
     @classmethod 
     def get_by_id(cls,data):
@@ -51,6 +62,7 @@ class User:
                 'updated_at': row['updated_at'],
                 }
             user.saved_books.append(book.Book(data))
+        print(user)
         return user
 
 #POST METHODS
@@ -65,6 +77,20 @@ class User:
         print(results)
         return results
 
+    
+    @classmethod
+    def update_user(cls, form_data):
+        query = """
+                UPDATE users
+                SET real_name = %(real_name)s,
+                gender = %(gender)s,
+                updated_at = NOW()
+                WHERE id = %(id)s;
+                """
+        return connectToMySQL(cls.db).query_db(query, form_data)
+
+
+
     #LOGIN 
     @classmethod
     def find_user(cls, data):
@@ -77,6 +103,7 @@ class User:
         else:
             return cls(result[0])
         
+
     #SAVE BOOK
     @classmethod
     def add_book(cls,data):
@@ -87,6 +114,14 @@ class User:
         return connectToMySQL(cls.db).query_db(query,data)
 
     #UNSAVE BOOK 
+    def remove_book(cls, form_data):
+        query=  """
+                DELETE FROM saves 
+                WHERE user_id = %(user_id)s
+                AND book_id = %(book_id)s;
+                """
+        print(query)
+        return connectToMySQL(cls.db).query_db(query,form_data)
 
     #VALIDATIONS
     @staticmethod
