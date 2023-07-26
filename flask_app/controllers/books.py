@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 from flask_app import app
 from flask import Flask, redirect, render_template, request, flash, session
 from flask_app.models.book import Book
@@ -24,10 +23,7 @@ def add_book_to_list():
     else:
         flash("There was an error. Please fill in the inputs")
         redirect("/book") 
-=======
-=======
 
->>>>>>> 1bc7542a52f61061480e08d05282322d509ba016
 from flask import Flask, render_template, session, redirect, request, flash
 from flask_app.models.user import User
 from flask_app.models.book import Book 
@@ -96,8 +92,3 @@ def edit_book(id):
     print(data)
     Book.update_book(data)
     return redirect(f"/books/{id}")
-<<<<<<< HEAD
->>>>>>> 805ffcbe649e0aa3e590018842e3705d6da2feb3
-=======
-
->>>>>>> 1bc7542a52f61061480e08d05282322d509ba016
