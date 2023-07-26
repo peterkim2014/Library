@@ -76,12 +76,12 @@ class Book:
         return connectToMySQL(cls.db).query_db(query,form_data)
         
     @classmethod
-    def eliminate(cls,data):
+    def eliminate(cls,id):
         query = """
                 DELETE FROM books
                 WHERE id = %(id)s;
                 """
-        results = connectToMySQL(cls.db).query_db(query,data)
+        results = connectToMySQL(cls.db).query_db(query,{"id": id})
         return results
 
 

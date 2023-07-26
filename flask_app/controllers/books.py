@@ -34,7 +34,7 @@ def edit_page(id):
     return render_template('book_edit.html', user=User.get_by_id(data), book=Book.get_by_id({'id':id}))
 
 # Delete method
-@app.route('/delete_book/<int:id>', methods=["POST"])
+@app.route('/delete_book/<int:id>')
 def delete_book(id):
     if 'user_id' not in session:
         return redirect('/')
