@@ -23,12 +23,17 @@
         </header>
         <main class="d-flex justify-content-center align-items-center vh-100">
             <div class="card p-3">
-                <!-- FORM NEEDS ACTION ROUTE -->
-                <!-- FORM NEEDS TO BE PRE-POPPULATED -->
 
                 <form action="/books/add" method="POST">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p>{{message}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
 
-                    <h2 class="text-center">Add A Book</h2>
+                    <h2 class="text-center">Add Book</h2>
                     <hr>
                     <div>
                         <label class="form-label" for="title">Title:</label>

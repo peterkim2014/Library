@@ -81,6 +81,7 @@ class Book:
                 DELETE FROM books
                 WHERE id = %(id)s;
                 """
+        print(query)
         results = connectToMySQL(cls.db).query_db(query,data)
         return results
 

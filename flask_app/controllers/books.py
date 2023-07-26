@@ -39,10 +39,8 @@ def delete_book(id):
     if 'user_id' not in session:
         return redirect('/')
     else: 
-        print(id)
-        Book.eliminate(id)
-
-    return redirect("/home")
+        Book.eliminate({'id':id})
+        return redirect('/home')
 
 
 #POST METHODS
