@@ -20,7 +20,7 @@
             </nav>
         </header>
         <main class="d-flex justify-content-center align-items-center vh-100">
-            <div class="align-items-center h-25 overflow-auto w-50">
+            <div class="align-items-center h-60 overflow-auto w-75">
                 <table class="table table-striped table-bordered border border-2 border-black">
                     <thead class="text-decoration-underline">
                         <tr>
@@ -32,7 +32,11 @@
                     <tbody>
                         {% for book in books %}
                             <tr>
-                                <td>{{book.title}}</td>
+                                <td>
+                                    <a href="/books/{{book.id}}">
+                                        {{book.title}}
+                                    </a>
+                                </td>
                                 <td>{{book.author}}</td>
                                 <td class="d-flex justify-content-evenly">
                                     <form action="/books/user_save" method="post">

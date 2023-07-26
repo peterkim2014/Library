@@ -42,6 +42,8 @@ class Book:
                 'username': row['username'],
                 'email': row['email'],
                 'password': "",
+                'real_name': "",
+                'gender': "",
                 'created_at': row['created_at'],
                 'updated_at': row['updated_at']
                 }
@@ -71,8 +73,7 @@ class Book:
                 updated_at = NOW()
                 WHERE id = %(id)s;
                 """
-        results = connectToMySQL(cls.db).query_db(query,form_data)
-        return results
+        return connectToMySQL(cls.db).query_db(query,form_data)
         
     @classmethod
     def eliminate(cls,data):
