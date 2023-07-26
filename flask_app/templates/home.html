@@ -45,6 +45,9 @@
                                         <input type="hidden" name="book_id" value="{{book.id}}" id="book_id">
                                         <input type="submit" class="btn bg-success text-white" value="Add to Reading List"></input>
                                     </form>
+                                    <form action="/delete_book/{{book.id}}" method="POST">
+                                        <input type="submit" class="btn bg-danger text-white" value="Delete Book"></input>
+                                    </form>
                                 </td>
                             </tr>
                         {% endfor %}

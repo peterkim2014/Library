@@ -85,8 +85,7 @@ class Book:
         return results
 
 
-
-        #VALIDATIONS
+    #VALIDATIONS
     @staticmethod
     def validate_book(book):
         is_valid = True
