@@ -114,6 +114,7 @@ class User:
         return connectToMySQL(cls.db).query_db(query,data)
 
     #UNSAVE BOOK 
+    @classmethod
     def remove_book(cls, form_data):
         query=  """
                 DELETE FROM saves 
