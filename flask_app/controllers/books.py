@@ -21,12 +21,12 @@ def add_book():
         return redirect('/')
     if not Book.validate_book(request.form):
         return redirect('/books/add_book')
-    data = {
-        'id': id,
+    form_data = {
         "title": request.form['title'],
         "author": request.form['author'],
         "pages": request.form['pages'],
         "publisher": request.form['publisher']
     }
-    Book.add_book(data)
+    print(form_data)
+    Book.add_book(form_data)
     return redirect('/home')

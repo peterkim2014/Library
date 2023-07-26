@@ -35,7 +35,11 @@
                                 <td>{{book.title}}</td>
                                 <td>{{book.author}}</td>
                                 <td class="d-flex justify-content-evenly">
-                                    <a class="btn bg-success text-white" href="">Add to Reading List</a>
+                                    <form action="/books/user_save" method="post">
+                                        <input type="hidden" name="user_id" value="{{user.id}}" id="user_id">
+                                        <input type="hidden" name="book_id" value="{{book.id}}" id="book_id">
+                                        <input type="submit" class="btn bg-success text-white" value="Add to Reading List"></input>
+                                    </form>
                                 </td>
                             </tr>
                         {% endfor %}

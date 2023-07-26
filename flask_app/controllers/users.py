@@ -2,7 +2,6 @@ from flask_app import app
 from flask import Flask, redirect, render_template, request, flash, session
 from ..models.user import User
 from ..models.book import Book
-# from ..models.book import Book
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 dataFormat = "%#m/%#d/%Y %I: %M %p"
@@ -57,6 +56,52 @@ def reg():
     id = User.register_user(data)
     session['user_id'] = id
 
+    return redirect('/home')
+
+@app.route('/login', methods=['POST'])
+def login():
+    user = User.get_by_username(request.form)
+
+    if not user:
+        flash("Incorrect username", "login_error")
+        return redirect('/')
+    if not bcrypt.check_password_hash(user.password, request.form['password']):
+        flash("Incorrect password", "login_error")
+        return redirect('/')
+    
+    session['user_id'] = user.id
+    return redirect('/home')
+
+@app.route('/books/user_save', methods=['POST'])
+def user_save():
+    if 'user_id' not in session:
+        return redirect('/')
+    else:
+        data={
+            'id':session['user_id']
+        }
+    form_data = {
+        "user_id": request.form['user_id'],
+        "book_id": request.form['book_id']
+    }
+    print(form_data)
+    User.add_book(form_data)
+    return redirect('/home')
+
+@app.route('/unsave', methods=['POST'])
+def unsave_book():
+    if 'user_id' not in session:
+        return redirect('/')
+    else: 
+        data={
+            'id':session['user_id']
+        }
+    form_data = {
+        "user_id": request.form['user_id'],
+        "book_id": request.form['book_id']
+    }
+    print(form_data)
+    User.remove_book(form_data)
     return redirect('/home')
 
 @app.route('/logout')

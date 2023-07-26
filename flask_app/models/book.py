@@ -53,7 +53,7 @@ class Book:
     def add_book(cls, form_data):
         query = """
                 INSERT INTO books (title, author, pages, publisher)
-                VALUES (%(title)s, %(author)s, %(page)s, %(publisher)s);
+                VALUES (%(title)s, %(author)s, %(pages)s, %(publisher)s);
                 """
         print(query)
         results = connectToMySQL(cls.db).query_db(query, form_data)
@@ -109,6 +109,7 @@ class Book:
             flash("Must include the author of the book")
             is_valid = False
             
+        print(is_valid)
         return is_valid
 
 

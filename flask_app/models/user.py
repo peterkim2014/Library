@@ -26,6 +26,17 @@ class User:
         for row in results: 
             users.append(cls(row))
         return users
+    
+    @classmethod
+    def get_by_username(cls, data):
+        query = """
+                SELECT * FROM users
+                WHERE username = %(username)s;
+                """
+        results = connectToMySQL(cls.db).query_db(query, data)
+        if len(results) < 1:
+            return False
+        return cls(results[0])
         
     @classmethod 
     def get_by_id(cls,data):
@@ -65,8 +76,6 @@ class User:
         print(results)
         return results
 
-    #LOGIN 
-
     #SAVE BOOK
     @classmethod
     def add_book(cls,data):
@@ -77,6 +86,14 @@ class User:
         return connectToMySQL(cls.db).query_db(query,data)
 
     #UNSAVE BOOK 
+    def remove_book(cls,data):
+        query=  """
+                DELETE FROM saves 
+                WHERE user_id = %(user_id)s
+                AND book_id = %(book_id)s;
+                """
+        print(query)
+        return connectToMySQL(cls.db).query_db(query,data)
 
     #VALIDATIONS
     @staticmethod
