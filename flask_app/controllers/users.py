@@ -128,6 +128,7 @@ def unsave_book():
     }
     print(form_data)
     User.remove_book(form_data)
+    return redirect(f"/users/{request.form['user_id']}")
 
 @app.route('/logout')
 def logout():
