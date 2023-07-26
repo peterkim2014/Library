@@ -42,6 +42,19 @@ def user_profile(id):
             "id": id
         }
         return render_template('profile.html', session_user=User.get_by_id(session_data), user=User.get_by_id(data))
+    
+@app.route('/edit_user/<int:id>')
+def edit_user_profile(id):
+    if 'user_id' not in session:
+        return redirect('/')
+    else: 
+        session_data = {
+        'id': session['user_id']
+    }
+        data = {
+            "id": id
+        }
+    return render_template('edit_profile.html', session_user=User.get_by_id(session_data), user=User.get_by_id(data))
 
 #ACTIONS/POSTS 
 @app.route('/register', methods=['POST'])
@@ -72,6 +85,18 @@ def login():
     session['user_id'] = user.id
     return redirect('/home')
 
+@app.route('/users/edit_process/<int:id>', methods=['POST'])
+def edit_user(id):
+    if 'user_id' not in session: 
+        return redirect('/')
+    data = {
+        'id': id,
+        'real_name': request.form['real_name'],
+        'gender': request.form['gender']
+    }
+    User.update_user(data)
+    return redirect(f"/users/{id}")
+
 @app.route('/books/user_save', methods=['POST'])
 def user_save():
     if 'user_id' not in session:
@@ -86,7 +111,7 @@ def user_save():
     }
     print(form_data)
     User.add_book(form_data)
-    return redirect('/home')
+    return redirect(f"/users/{request.form['user_id']}")
 
 @app.route('/unsave', methods=['POST'])
 def unsave_book():

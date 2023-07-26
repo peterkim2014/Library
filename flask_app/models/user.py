@@ -62,6 +62,7 @@ class User:
                 'updated_at': row['updated_at'],
                 }
             user.saved_books.append(book.Book(data))
+        print(user)
         return user
 
 #POST METHODS
@@ -75,6 +76,17 @@ class User:
         results = connectToMySQL(cls.db).query_db(query,data)
         print(results)
         return results
+    
+    @classmethod
+    def update_user(cls, form_data):
+        query = """
+                UPDATE users
+                SET real_name = %(real_name)s,
+                gender = %(gender)s,
+                updated_at = NOW()
+                WHERE id = %(id)s;
+                """
+        return connectToMySQL(cls.db).query_db(query, form_data)
 
     #SAVE BOOK
     @classmethod
@@ -86,14 +98,14 @@ class User:
         return connectToMySQL(cls.db).query_db(query,data)
 
     #UNSAVE BOOK 
-    def remove_book(cls,data):
+    def remove_book(cls, form_data):
         query=  """
                 DELETE FROM saves 
                 WHERE user_id = %(user_id)s
                 AND book_id = %(book_id)s;
                 """
         print(query)
-        return connectToMySQL(cls.db).query_db(query,data)
+        return connectToMySQL(cls.db).query_db(query,form_data)
 
     #VALIDATIONS
     @staticmethod

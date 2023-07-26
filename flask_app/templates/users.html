@@ -30,10 +30,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for user in users %}
                         <tr>
-                            <td>USERNAME</td>
-                            <td>CREATED AT</td>
+                            <td>
+                                <a href="/users/{{user.id}}">
+                                    {{user.username}}
+                                </a>
+                            </td>
+                            <td>{{user.created_at}}</td>
                         </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

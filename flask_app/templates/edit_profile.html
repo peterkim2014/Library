@@ -23,24 +23,20 @@
             <div class="card p-3">
                 <!-- FORM NEEDS ACTION ROUTE -->
                 <!-- FORM NEEDS TO BE PRE-POPPULATED -->
-                <form action="" method="POST">
+                <form action="/users/edit_process/{{user.id}}" method="POST">
                     <h2 class="text-center">Edit</h2>
                     <hr>
                     <div>
-                        <label class="form-label" for="name">Name:</label>
-                        <input class="form-control" type="text" name="name">
-                    </div>
-                    <div>
-                        <label class="form-label" for="name">Birthday:</label>
-                        <input class="form-control" type="text" name="birthday">
+                        <label class="form-label" for="real_name">Name:</label>
+                        <input class="form-control" type="text" name="real_name" value="{{user.real_name}}">
                     </div>
                     <div>
                         <label class="form-label" for="name">Gender:</label>
-                        <input class="form-control" type="text" name="gender">
+                        <input class="form-control" type="text" name="gender" value="{{user.gender}}">
                     </div>
                     <div class="mt-3 text-center">
                         <input class="btn bg-success text-white" type="submit">
-                        <a class="btn bg-danger text-white" href="./profile.html">Go Back</a>
+                        <a class="btn bg-danger text-white" href="/users/{{user.id}}">Go Back</a>
                     </div>
                 </form>
             </div>
