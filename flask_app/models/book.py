@@ -19,6 +19,7 @@ class Book:
     def get_all(cls):
         query = """
                 SELECT * FROM books
+                ORDER BY Author ASC;
                 """
         results = connectToMySQL(cls.db).query_db(query)
 
@@ -35,20 +36,20 @@ class Book:
         results = connectToMySQL(cls.db).query_db(query,data)
         book = cls(results[0])
         for row in results:
-            if row['users.id'] == None:
-                break
-            data = {
-                "id": row['users.id'],
+            # if row['users.id'] == None:
+            #     break
+            user_data = {
+                "id": row['user_id'],
                 'username': row['username'],
                 'email': row['email'],
                 'password': "",
                 'real_name': "",
                 'gender': "",
-                'created_at': row['created_at'],
-                'updated_at': row['updated_at']
+                'created_at': row['saves.created_at'],
+                'updated_at': ""
                 }
-            book.saved_by.append(user.User(data))
-            return book 
+            book.saved_by.append(user.User(user_data))
+        return book 
         
         #POST METHODS
     @classmethod #Save/Add a new book 

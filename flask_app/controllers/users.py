@@ -8,6 +8,8 @@ dataFormat = "%#m/%#d/%Y %I: %M %p"
 
 @app.route('/')
 def login_and_reg():
+    if 'user_id' in session: 
+        return redirect ('/home')
     return render_template("welcome_page.html")
 
 @app.route('/home')
