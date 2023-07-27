@@ -45,6 +45,30 @@
                         <p>{{book.publisher}}</p>
                     </div>
                 </div>
+                <div style="height: 20rem;" class="card-footer overflow-auto">
+                    <h2>Current Readers</h2>
+                    <table class="table table-striped table-bordered border border-2 border-black">
+                        <thead class="text-decoration-underline">
+                            <tr>
+                                <th>Username</th>
+                                <th>Reading Since</th>
+                            </tr>
+                        </thead>
+                        {% for save_user in book.saved_by %}
+                        <tbody>
+                            
+                                <tr>
+                                    <td>
+                                        <a href="/users/{{save_user.id}}">
+                                            {{save_user.username}}
+                                        </a>
+                                    </td>
+                                    <td>{{save_user.created_at}}</td>
+                                </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </main>
     </container>

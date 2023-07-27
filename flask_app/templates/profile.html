@@ -63,7 +63,11 @@
                         {% for book in user.saved_books %}
                         <tbody>
                             <tr>
-                                <td>{{book.title}}</td>
+                                <td>
+                                    <a href="/books/{{book.id}}">
+                                        {{book.title}}
+                                    </a>
+                                </td>
                                 <td>{{book.author}}</td>
                                 {% if session['user_id'] == user.id %}
                                     <td class="d-flex justify-content-evenly">
